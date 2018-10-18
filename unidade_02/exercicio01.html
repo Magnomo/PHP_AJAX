@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Solicitacao</title>
+	<script type="text/javascript">
+        	function carregaDados(){
+        	// cria um objeto de requisição
+        	var ajax ;
+        	if(window.XMLHttpRequest){
+        		ajax = new XMLHttpRequest();
+        	}else{
+        		ajax = new ActiveXObject("Microsoft.XMLHTTP");
+        	}
+        	//define como pegar o dado (get/post/put/delete), de onde pegar e se acessará de forma sincrona(false) ou assincrona(true)
+        	//readyState{ :0=> requisição não iniciada, 1 =>conexão estabelecida, 2=>requisição recebida, 3=> processando requisição, 4=>requisição finalizada }
+        	// status{ 404 => not found, 200=>Ok}
+        	ajax.open('GET','dados.txt');
+        	//lê o arquivo
+        	
+        	ajax.onreadystatechange = function(){
+        		if(ajax.status==200){
+        			if(ajax.readyState==3){
+        				console.log("caregando...");
+        			}
+        			if(ajax.readyState==4){
+        				var elemento = document.getElementById('dinamico');
+        				elemento.innerHTML = ajax.responseText;
+        				var titulo = document.getElementsByTagName('h1');
+        				titulo[0].innerHTML = ajax.responseText;
+        			}
+        		}else{
+        			console.log("Erro na operação");
+        		}
+        	}
+        	ajax.send();
+        }// fechar função
+        	
+        </script>
+    </head>
+
+    <body>
+    	<button id="botao" onclick="carregaDados()">Click-me</button>
+    	<div id="dinamico"></div>
+    	<h1></h1>
+    </body>
+    </html>
