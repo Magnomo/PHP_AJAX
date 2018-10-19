@@ -54,7 +54,7 @@ if(!$lista_estados) {
                 <div id="mensagem">
                     <p></p>
                 </div>
-            </form> 
+            </form>     
 
         </div>
     </main>
@@ -76,14 +76,14 @@ if(!$lista_estados) {
                 async:false
             }).then(sucesso, falha);
             function sucesso(data){
-              $sucesso = $.parseJSON(data)['sucesso'];
-              $mensagem = $.parseJSON(data)['mensagem'];
+              var sucesso = $.parseJSON(data)['sucesso'];
+              var mensagem = $.parseJSON(data)['mensagem'];
               $('#mensagem').show();
-              if($sucesso)
+              if(sucesso)
                 $('#mensagem p').css('background', '#0f0');
               
               
-              $('#mensagem p').html($mensagem);
+              $('#mensagem p').html(mensagem);
 
 
           }
